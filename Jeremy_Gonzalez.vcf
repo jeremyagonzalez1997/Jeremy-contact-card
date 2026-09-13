@@ -1,0 +1,11 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Gonzalez;Jeremy;;;
+FN:Jeremy Gonzalez
+ORG:Honda of Staten Island
+TITLE:Sales Consultant
+TEL;TYPE=CELL,VOICE:+19173231047
+EMAIL;TYPE=INTERNET,WORK:jgonzalez@sihonda.com
+ADR;TYPE=WORK:;;250 Parkinson Avenue;Staten Island;NY;10305;United States
+URL:https://www.sihonda.com/
+END:VCARD

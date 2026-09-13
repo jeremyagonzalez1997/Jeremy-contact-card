@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#08090b">
+<meta name="description" content="Connect with Jeremy Gonzalez, Sales Consultant at Honda of Staten Island. Browse inventory, save contact information, get directions, and stay connected.">
+<meta property="og:title" content="Jeremy Gonzalez | Honda of Staten Island">
+<meta property="og:description" content="Sales Consultant • Honda of Staten Island">
+<meta property="og:type" content="website">
+<meta property="og:image" content="jeremy-gonzalez.jpg">
+<title>Jeremy Gonzalez | Honda of Staten Island</title>
+
+<style>
+:root {
+  --bg: #07080a;
+  --surface: #111318;
+  --surface2: #17191f;
+  --surface3: #1d2027;
+  --surface4: #22252d;
+  --text: #f7f8fa;
+  --muted: #a5a8b1;
+  --muted2: #747984;
+  --line: rgba(255,255,255,.085);
+  --lineStrong: rgba(255,255,255,.145);
+  --red: #e41c24;
+  --redHover: #f0272f;
+  --redSoft: rgba(228,28,36,.15);
+  --redFaint: rgba(228,28,36,.075);
+  --green: #36c96f;
+  --amber: #f4b74e;
+  --shadow: 0 22px 70px rgba(0,0,0,.42);
+  --ease: cubic-bezier(.2,.7,.25,1);
+}
+
+* { box-sizing: border-box; min-width: 0; }
+html { background: var(--bg); color-scheme: dark; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100svh;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", Inter, "Segoe UI", Helvetica, Arial, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 50% -10%, rgba(228,28,36,.20), transparent 34rem),
+    radial-gradient(circle at 105% 40%, rgba(255,255,255,.045), transparent 25rem),
+    linear-gradient(180deg, #08090b 0%, #0b0d10 48%, #07080a 100%);
+  padding:
+    max(20px, env(safe-area-inset-top))
+    max(16px, env(safe-area-inset-right))
+    max(30px, env(safe-area-inset-bottom))
+    max(16px, env(safe-area-inset-left));
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior-y: none;
+  overflow-x: hidden;
+}
+a, button, input, select, textarea { -webkit-tap-highlight-color: transparent; font: inherit; }
+a, button, .interactive { touch-action: manipulation; }
+button { color: inherit; }
+.page { width: min(100%, 520px); margin: 0 auto; }
+
+.topline {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  margin: 0 4px 18px;
+}
+.dealer-name {
+  display: flex; align-items: center; gap: 10px; color: #e7e8eb;
+  font-size: 11px; font-weight: 790; letter-spacing: .085em; text-transform: uppercase;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.dealer-mark {
+  flex: 0 0 30px; width: 30px; height: 30px; border-radius: 10px;
+  display: grid; place-items: center; border: 1px solid var(--lineStrong);
+  background: rgba(255,255,255,.045); font-size: 14px; font-weight: 900;
+}
+.connect-pill {
+  flex: 0 0 auto; display: inline-flex; align-items: center; gap: 7px; padding: 8px 10px;
+  border: 1px solid var(--line); border-radius: 999px; background: rgba(255,255,255,.035);
+  color: #c2c4ca; font-size: 11px;
+}
+.dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 13px rgba(54,201,111,.55); }
+
+.hero {
+  overflow: hidden; border: 1px solid var(--line); border-radius: 30px;
+  background: linear-gradient(145deg, rgba(255,255,255,.052), rgba(255,255,255,.015)), rgba(15,16,20,.95);
+  box-shadow: var(--shadow);
+}
+.photo-wrap { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: #101114; }
+.photo-wrap::after { content: ""; position: absolute; inset: auto 0 0; height: 48%; background: linear-gradient(to bottom, transparent, rgba(9,10,12,.94)); pointer-events: none; }
+.profile-photo { width: 100%; height: 100%; display: block; object-fit: cover; object-position: 50% 24%; transform: scale(1.015); }
+.hero-copy { position: relative; margin-top: -54px; padding: 0 22px 23px; z-index: 2; }
+.eyebrow { margin: 0 0 7px; color: #d5d6db; font-size: 11px; font-weight: 800; letter-spacing: .11em; text-transform: uppercase; }
+h1 { margin: 0; font-size: clamp(32px, 9vw, 44px); line-height: 1.02; letter-spacing: -.045em; font-weight: 840; }
+.role { margin: 10px 0 0; color: #b5b7be; font-size: 15px; line-height: 1.5; }
+.role strong { color: #f1f2f4; font-weight: 700; }
+.tagline { margin: 14px 0 0; color: #a2a5ad; font-size: 13px; line-height: 1.62; }
+.section-title { margin: 24px 4px 10px; color: #777a83; font-size: 10px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
+
+.interactive {
+  position: relative; overflow: hidden; isolation: isolate; transform: translateZ(0);
+  transition: transform .16s var(--ease), border-color .16s ease, box-shadow .18s ease, background .18s ease;
+}
+.interactive::after { content: ""; position: absolute; inset: 0; z-index: -1; opacity: 0; background: linear-gradient(135deg, rgba(228,28,36,.19), rgba(255,255,255,.04)); transition: opacity .16s ease; }
+.interactive:hover { border-color: var(--lineStrong); }
+.interactive.is-pressed { transform: scale(.975); border-color: rgba(228,28,36,.58); box-shadow: 0 0 0 1px rgba(228,28,36,.08), 0 12px 34px rgba(228,28,36,.12); }
+.interactive.is-pressed::after { opacity: 1; }
+.ripple { position: absolute; width: 18px; height: 18px; border-radius: 999px; pointer-events: none; z-index: 10; background: rgba(228,28,36,.34); transform: translate(-50%,-50%) scale(0); animation: ripple .48s ease-out forwards; }
+@keyframes ripple { to { transform: translate(-50%,-50%) scale(14); opacity: 0; } }
+
+.social-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
+.social {
+  min-height: 94px; border-radius: 22px; border: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.018)), var(--surface);
+  color: var(--text); text-decoration: none; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 9px; padding: 14px; box-shadow: 0 10px 30px rgba(0,0,0,.18);
+}
+.social-icon { width: 28px; height: 28px; display: grid; place-items: center; }
+.social-icon svg { width: 26px; height: 26px; display: block; }
+.social-label { font-size: 12px; font-weight: 730; color: #dedfe3; }
+.quick-contact { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 10px; }
+.mini-action {
+  min-height: 82px; border-radius: 20px; border: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(255,255,255,.034), rgba(255,255,255,.014)), var(--surface);
+  color: #eceef1; text-decoration: none; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 8px; font-size: 12px; font-weight: 710; padding: 10px 6px;
+}
+.mini-action svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+.actions { display: grid; gap: 11px; }
+.action {
+  min-height: 78px; width: 100%; border-radius: 22px; border: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(255,255,255,.040), rgba(255,255,255,.017)), var(--surface);
+  color: var(--text); text-decoration: none; display: grid; grid-template-columns: 48px minmax(0,1fr) 18px;
+  align-items: center; gap: 13px; padding: 13px 15px; box-shadow: 0 9px 26px rgba(0,0,0,.18); text-align: left; cursor: pointer;
+}
+.action-primary { border-color: rgba(228,28,36,.28); background: linear-gradient(135deg, rgba(228,28,36,.13), rgba(255,255,255,.022) 62%), var(--surface); box-shadow: 0 14px 38px rgba(0,0,0,.23), 0 0 0 1px rgba(228,28,36,.035) inset; }
+.action-wallet { border-color: rgba(255,255,255,.16); background: linear-gradient(145deg, rgba(255,255,255,.085), rgba(255,255,255,.025)), #0d0f13; box-shadow: 0 14px 34px rgba(0,0,0,.28); }
+.action-wallet .action-icon { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 27px; line-height: 1; background: #fff; color: #050607; border-color: rgba(255,255,255,.25); }
+.wallet-note { color: #c9cbd1; }
+.toast { position: fixed; z-index: 1000; left: 50%; bottom: max(20px, env(safe-area-inset-bottom)); width: min(calc(100% - 28px), 430px); transform: translate(-50%, 24px); opacity: 0; pointer-events: none; border: 1px solid var(--lineStrong); border-radius: 17px; background: rgba(22,24,29,.96); box-shadow: 0 20px 60px rgba(0,0,0,.5); padding: 13px 15px; color: #f3f4f6; font-size: 12px; line-height: 1.45; transition: opacity .2s ease, transform .2s var(--ease); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); }
+.toast.show { opacity: 1; transform: translate(-50%,0); }
+.action-primary .action-icon { color: #fff; border-color: rgba(228,28,36,.32); background: linear-gradient(180deg, rgba(228,28,36,.28), rgba(228,28,36,.16)); box-shadow: 0 10px 28px rgba(228,28,36,.11); }
+.action-icon {
+  width: 48px; height: 48px; border-radius: 15px; display: grid; place-items: center;
+  background: linear-gradient(180deg, rgba(255,255,255,.065), rgba(255,255,255,.026)), #17191f;
+  border: 1px solid rgba(255,255,255,.07); transition: color .16s ease, border-color .16s ease, background .16s ease, box-shadow .16s ease;
+}
+.interactive.is-pressed .action-icon { color: #fff; border-color: rgba(228,28,36,.38); background: rgba(228,28,36,.18); box-shadow: 0 0 24px rgba(228,28,36,.11); }
+.action-icon svg { width: 21px; height: 21px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.action-copy { overflow: hidden; }
+.action-title { display: block; font-size: 15px; line-height: 1.25; font-weight: 760; letter-spacing: -.012em; overflow-wrap: anywhere; }
+.action-subtitle { display: block; margin-top: 4px; color: var(--muted); font-size: 12px; line-height: 1.38; overflow-wrap: anywhere; }
+.chevron { width: 18px; display: grid; place-items: center; color: #6f727b; font-size: 22px; line-height: 1; transition: color .16s ease, transform .16s ease; }
+.interactive.is-pressed .chevron { color: #f3f4f6; transform: translateX(2px); }
+
+.visit-card { overflow: hidden; border: 1px solid var(--line); border-radius: 26px; background: linear-gradient(150deg, rgba(255,255,255,.045), rgba(255,255,255,.014)), var(--surface); box-shadow: 0 14px 40px rgba(0,0,0,.22); }
+.map-shell { position: relative; height: 188px; overflow: hidden; background: #17191f; }
+.map-shell iframe { width: 100%; height: 100%; border: 0; filter: saturate(.78) contrast(1.03) brightness(.88); }
+.map-overlay { position: absolute; inset: 0; pointer-events: none; box-shadow: inset 0 -40px 45px rgba(10,11,14,.35); }
+.visit-copy { padding: 18px; }
+.visit-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; }
+.visit-title { margin: 0; font-size: 17px; font-weight: 780; letter-spacing: -.02em; }
+.visit-address { margin: 5px 0 0; color: var(--muted); font-size: 12.5px; line-height: 1.5; }
+.store-status { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 6px; padding: 7px 9px; border: 1px solid var(--line); border-radius: 999px; background: rgba(255,255,255,.03); color: #c8cad0; font-size: 10px; font-weight: 730; }
+.store-status .status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--muted2); }
+.store-status.open .status-dot { background: var(--green); box-shadow: 0 0 10px rgba(54,201,111,.45); }
+.store-status.closed .status-dot { background: var(--red); box-shadow: 0 0 10px rgba(228,28,36,.34); }
+.hours-line { margin-top: 14px; padding-top: 13px; border-top: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; gap: 10px; color: #c5c7cc; font-size: 11.5px; }
+.hours-line span:last-child { color: var(--muted); text-align: right; }
+.map-actions { margin-top: 14px; display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+.map-btn { min-height: 46px; border-radius: 15px; border: 1px solid var(--line); background: rgba(255,255,255,.035); color: #f0f1f3; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-size: 12px; font-weight: 730; padding: 10px; }
+.map-btn.primary { border-color: rgba(228,28,36,.22); background: rgba(228,28,36,.11); }
+.map-btn svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.hours-details { margin: 12px 0 0; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+.hours-details summary { list-style: none; cursor: pointer; padding: 12px 13px; display: flex; justify-content: space-between; align-items: center; gap: 10px; color: #d5d6da; font-size: 11.5px; font-weight: 700; background: rgba(255,255,255,.025); }
+.hours-details summary::-webkit-details-marker { display: none; }
+.hours-details summary::after { content: "+"; color: var(--muted); font-size: 17px; font-weight: 400; line-height: 1; }
+.hours-details[open] summary::after { content: "−"; }
+.hours-grid { padding: 4px 13px 10px; background: rgba(0,0,0,.12); }
+.hours-row { display: flex; justify-content: space-between; gap: 16px; padding: 7px 0; color: var(--muted); font-size: 11px; }
+.hours-row.today { color: #f0f1f3; font-weight: 730; }
+
+.footer { padding: 27px 8px 8px; text-align: center; color: var(--muted2); font-size: 11px; line-height: 1.55; }
+.footer strong { display: block; color: #c8cad0; font-size: 12px; margin-bottom: 4px; }
+
+@media (hover:hover) and (pointer:fine) { .interactive:hover { transform: translateY(-1px); box-shadow: 0 12px 32px rgba(0,0,0,.24); } }
+@media (max-width: 520px) {
+  .visit-head { flex-direction: column; gap: 10px; }
+  .store-status { align-self: flex-start; }
+}
+@media (max-width: 350px) {
+  .map-actions { grid-template-columns: 1fr; }
+  .social-grid { gap: 9px; }
+}
+@media (max-width:380px) {
+  body { padding-left: 12px; padding-right: 12px; }
+  .hero-copy { padding-left: 18px; padding-right: 18px; }
+  .dealer-name { font-size: 10px; }
+  .action { grid-template-columns: 44px minmax(0,1fr) 16px; gap: 10px; padding: 12px; }
+  .action-icon { width: 44px; height: 44px; }
+  .action-title { font-size: 14px; }
+  .action-subtitle { font-size: 11px; }
+}
+@media (prefers-reduced-motion: reduce) { *,*::before,*::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
+</style>
+</head>
+<body>
+<main class="page">
+  <div class="topline">
+    <div class="dealer-name"><div class="dealer-mark">H</div><span>Honda of Staten Island</span></div>
+    <div class="connect-pill"><span class="dot"></span><span>Connect</span></div>
+  </div>
+
+  <section class="hero">
+    <div class="photo-wrap">
+      <picture>
+        <source srcset="jeremy-gonzalez.webp" type="image/webp">
+        <img class="profile-photo" src="jeremy-gonzalez.jpg" alt="Jeremy Gonzalez, Sales Consultant at Honda of Staten Island" width="960" height="1200">
+      </picture>
+    </div>
+    <div class="hero-copy">
+      <p class="eyebrow">Sales Consultant</p>
+      <h1>Jeremy Gonzalez</h1>
+      <p class="role"><strong>Honda of Staten Island</strong> · Staten Island, NY</p>
+      <p class="tagline">Here to make your Honda buying experience clear, comfortable, and straightforward from the first question to delivery.</p>
+    </div>
+  </section>
+
+  <div class="section-title">Contact</div>
+  <div class="quick-contact">
+    <a class="mini-action interactive" href="tel:+19173231047" aria-label="Call Jeremy">
+      <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.62 2.63a2 2 0 0 1-.45 2.11L8 9.73a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.85.29 1.73.5 2.63.62A2 2 0 0 1 22 16.92z"/></svg><span>Call</span>
+    </a>
+    <a class="mini-action interactive" href="sms:+19173231047" aria-label="Text Jeremy">
+      <svg viewBox="0 0 24 24"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg><span>Text</span>
+    </a>
+    <a class="mini-action interactive" href="mailto:jgonzalez@sihonda.com" aria-label="Email Jeremy">
+      <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span>Email</span>
+    </a>
+  </div>
+
+  <div class="section-title">Social</div>
+  <div class="social-grid">
+    <a class="social interactive" href="https://www.facebook.com/share/1d1JzCF4Sq/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer"><span class="social-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h3V4.5c-.6-.1-1.9-.2-3.4-.2-3.3 0-5.6 2-5.6 5.8V13H5v4h3v7h4.2v-7h3.5l.6-4h-4.1v-2.5c0-1.2.3-2.5 1.8-2.5Z" fill="currentColor"/></svg></span><span class="social-label">Facebook</span></a>
+    <a class="social interactive" href="https://www.tiktok.com/@zaynnaz" target="_blank" rel="noopener noreferrer"><span class="social-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.2 3c.5 2.5 1.9 4 4.3 4.7v3.7c-1.7 0-3.2-.5-4.4-1.4v6.3a5.9 5.9 0 1 1-5-5.8v3.8a2.2 2.2 0 1 0 1.2 2v-13h3.9Z" fill="currentColor"/></svg></span><span class="social-label">TikTok</span></a>
+  </div>
+
+  <div class="section-title">Start Here</div>
+  <div class="actions">
+    <a class="action interactive" href="Jeremy_Gonzalez.vcf">
+      <span class="action-icon"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
+      <span class="action-copy"><span class="action-title">Save My Contact</span><span class="action-subtitle">Add Jeremy directly to your phone</span></span><span class="chevron">›</span>
+    </a>
+
+    <a class="action action-wallet interactive" id="walletPassButton" href="wallet/Jeremy_Gonzalez.pkpass" type="application/vnd.apple.pkpass">
+      <span class="action-icon" aria-hidden="true"></span>
+      <span class="action-copy"><span class="action-title">Add Jeremy to Apple Wallet</span><span class="action-subtitle wallet-note">Keep Jeremy's contact card in Wallet · surfaces near Honda</span></span><span class="chevron">›</span>
+    </a>
+
+    <a class="action interactive" href="https://www.sihonda.com/searchnew.aspx" target="_blank" rel="noopener noreferrer">
+      <span class="action-icon"><svg viewBox="0 0 24 24"><path d="M3 13l2-5a3 3 0 0 1 2.8-2h8.4A3 3 0 0 1 19 8l2 5"/><path d="M5 13h14a2 2 0 0 1 2 2v3H3v-3a2 2 0 0 1 2-2z"/><circle cx="7" cy="16" r="1"/><circle cx="17" cy="16" r="1"/></svg></span>
+      <span class="action-copy"><span class="action-title">Browse New Honda Inventory</span><span class="action-subtitle">Explore current new Hondas in stock</span></span><span class="chevron">›</span>
+    </a>
+
+    <a class="action interactive" href="https://www.sihonda.com/searchused.aspx" target="_blank" rel="noopener noreferrer">
+      <span class="action-icon"><svg viewBox="0 0 24 24"><path d="M4 10.5 6 7h12l2 3.5"/><path d="M3 12.5h18v5.5H3z"/><path d="M6 18v2M18 18v2"/><circle cx="7" cy="15" r="1"/><circle cx="17" cy="15" r="1"/><path d="M9 7V5h6v2"/></svg></span>
+      <span class="action-copy"><span class="action-title">Browse Pre-Owned Inventory</span><span class="action-subtitle">Shop available used and pre-owned vehicles</span></span><span class="chevron">›</span>
+    </a>
+
+    <a class="action interactive" href="https://search.google.com/local/writereview?placeid=ChIJWdrMceROwokR9L0XhTPh66A" target="_blank" rel="noopener noreferrer">
+      <span class="action-icon"><svg viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3 6.4 20.2 7.5 14 3 9.6l6.2-.9L12 3z"/></svg></span>
+      <span class="action-copy"><span class="action-title">Leave a Google Review</span><span class="action-subtitle">Share your experience with Honda of Staten Island</span></span><span class="chevron">›</span>
+    </a>
+  </div>
+
+  <div class="section-title">Visit Me</div>
+  <section class="visit-card" aria-label="Honda of Staten Island location">
+    <div class="map-shell">
+      <iframe title="Map to Honda of Staten Island" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=250%20Parkinson%20Avenue%2C%20Staten%20Island%2C%20NY%2010305&z=15&output=embed"></iframe>
+      <div class="map-overlay"></div>
+    </div>
+    <div class="visit-copy">
+      <div class="visit-head">
+        <div><h2 class="visit-title">Visit Jeremy at Honda</h2><p class="visit-address">250 Parkinson Avenue<br>Staten Island, NY 10305</p></div>
+        <div class="store-status" id="storeStatus"><span class="status-dot"></span><span>Checking hours</span></div>
+      </div>
+      <div class="hours-line"><span id="todayLabel">Today</span><span id="todayHours">—</span></div>
+      <div class="map-actions">
+        <a class="map-btn primary interactive" id="primaryMaps" href="#" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg><span>Directions</span></a>
+        <a class="map-btn interactive" id="secondaryMaps" href="#" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M9 18 3 21V6l6-3 6 3 6-3v15l-6 3-6-3Z"/><path d="M9 3v15M15 6v15"/></svg><span>Google Maps</span></a>
+      </div>
+      <details class="hours-details"><summary>Sales hours</summary><div class="hours-grid" id="hoursGrid"></div></details>
+    </div>
+  </section>
+
+  <footer class="footer"><strong>Jeremy Gonzalez · Honda of Staten Island</strong>(917) 323-1047 · jgonzalez@sihonda.com</footer>
+</main>
+<div class="toast" id="siteToast" role="status" aria-live="polite"></div>
+
+<script>
+(() => {
+  const DEALER = {
+    address: '250 Parkinson Avenue, Staten Island, NY 10305',
+    timezone: 'America/New_York',
+    hours: {
+      0: { open: '11:00', close: '16:00', label: '11:00 AM – 4:00 PM' },
+      1: { open: '09:00', close: '19:00', label: '9:00 AM – 7:00 PM' },
+      2: { open: '09:00', close: '19:00', label: '9:00 AM – 7:00 PM' },
+      3: { open: '09:00', close: '19:00', label: '9:00 AM – 7:00 PM' },
+      4: { open: '09:00', close: '19:00', label: '9:00 AM – 7:00 PM' },
+      5: { open: '09:00', close: '18:00', label: '9:00 AM – 6:00 PM' },
+      6: { open: '09:00', close: '18:00', label: '9:00 AM – 6:00 PM' }
+    }
+  };
+
+  const $ = (id) => document.getElementById(id);
+  const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+
+  // tactile interactions
+  function bindInteractive(root = document) {
+    root.querySelectorAll('.interactive').forEach((el) => {
+      if (el.dataset.pressBound) return;
+      el.dataset.pressBound = '1';
+      const clearPressed = () => window.setTimeout(() => el.classList.remove('is-pressed'), 90);
+      el.addEventListener('pointerdown', (event) => {
+        el.classList.add('is-pressed');
+        const rect = el.getBoundingClientRect();
+        const ripple = document.createElement('span');
+        ripple.className = 'ripple'; ripple.style.left = `${event.clientX - rect.left}px`; ripple.style.top = `${event.clientY - rect.top}px`;
+        el.appendChild(ripple); ripple.addEventListener('animationend', () => ripple.remove(), { once:true });
+      });
+      el.addEventListener('pointerup', clearPressed); el.addEventListener('pointercancel', clearPressed); el.addEventListener('pointerleave', () => el.classList.remove('is-pressed'));
+      el.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') el.classList.add('is-pressed'); });
+      el.addEventListener('keyup', clearPressed);
+    });
+  }
+  bindInteractive();
+
+  // Apple Wallet pass: keep the website button safe until a signed .pkpass is installed.
+  const walletButton = $('walletPassButton');
+  const toast = $('siteToast');
+  let toastTimer;
+  function showToast(message) {
+    toast.textContent = message; toast.classList.add('show');
+    clearTimeout(toastTimer); toastTimer = setTimeout(() => toast.classList.remove('show'), 3600);
+  }
+  walletButton?.addEventListener('click', async (event) => {
+    event.preventDefault();
+    const url = walletButton.getAttribute('href');
+    try {
+      const response = await fetch(url, { method:'HEAD', cache:'no-store' });
+      if (!response.ok) throw new Error('Pass not published');
+      window.location.href = url;
+    } catch (_) {
+      showToast('Apple Wallet setup is not finished yet. The pass must be signed with Jeremy’s Apple Pass Type certificate before it can be added.');
+    }
+  });
+
+  // New York clock / store status
+  function nyParts(date = new Date()) {
+    const parts = new Intl.DateTimeFormat('en-US',{ timeZone: DEALER.timezone, weekday:'long', year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit', hour12:false }).formatToParts(date);
+    const obj = {}; parts.forEach(p => { if (p.type !== 'literal') obj[p.type] = p.value; });
+    return obj;
+  }
+  function mins(hhmm) { const [h,m] = hhmm.split(':').map(Number); return h*60+m; }
+  function updateStoreHours() {
+    const now = nyParts();
+    const dayIndex = days.indexOf(now.weekday);
+    const schedule = DEALER.hours[dayIndex];
+    const current = Number(now.hour === '24' ? 0 : now.hour)*60 + Number(now.minute);
+    const open = current >= mins(schedule.open) && current < mins(schedule.close);
+    const status = $('storeStatus'); status.classList.toggle('open',open); status.classList.toggle('closed',!open);
+    status.querySelector('span:last-child').textContent = open ? `Open · until ${schedule.label.split(' – ')[1]}` : 'Closed now';
+    $('todayLabel').textContent = `${now.weekday} sales hours`;
+    $('todayHours').textContent = schedule.label;
+    const grid = $('hoursGrid'); grid.innerHTML = '';
+    [1,2,3,4,5,6,0].forEach(i => {
+      const row = document.createElement('div'); row.className = `hours-row${i === dayIndex ? ' today' : ''}`;
+      row.innerHTML = `<span>${days[i]}${i === dayIndex ? ' · Today' : ''}</span><span>${DEALER.hours[i].label}</span>`; grid.appendChild(row);
+    });
+  }
+  updateStoreHours(); setInterval(updateStoreHours, 60000);
+
+  // Device-aware directions
+  const encodedDestination = encodeURIComponent(DEALER.address);
+  const ua = navigator.userAgent || '';
+  const isApple = /iPhone|iPad|iPod|Macintosh/.test(ua);
+  const appleUrl = `https://maps.apple.com/?daddr=${encodedDestination}`;
+  const googleUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodedDestination}`;
+  if (isApple) {
+    $('primaryMaps').href = appleUrl; $('primaryMaps').querySelector('span').textContent = 'Apple Maps';
+    $('secondaryMaps').href = googleUrl; $('secondaryMaps').querySelector('span').textContent = 'Google Maps';
+  } else {
+    $('primaryMaps').href = googleUrl; $('primaryMaps').querySelector('span').textContent = 'Google Maps';
+    $('secondaryMaps').href = `geo:0,0?q=${encodedDestination}`; $('secondaryMaps').querySelector('span').textContent = 'Maps App';
+  }
+
+})();;
+</script>
+</body>
+</html>
