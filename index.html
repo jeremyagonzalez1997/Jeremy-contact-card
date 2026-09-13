@@ -1,0 +1,885 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#08090b">
+<meta name="description" content="Connect with Jeremy Gonzalez, Sales Consultant at Honda of Staten Island. Schedule an appointment, browse inventory, save contact information, and get directions.">
+<meta property="og:title" content="Jeremy Gonzalez | Honda of Staten Island">
+<meta property="og:description" content="Sales Consultant • Honda of Staten Island">
+<meta property="og:type" content="website">
+<meta property="og:image" content="jg-thumbnail.png">
+<link rel="icon" type="image/png" sizes="192x192" href="jg-site-icon.png">
+<link rel="apple-touch-icon" href="jg-site-icon.png">
+<title>Jeremy Gonzalez | Honda of Staten Island</title>
+<link rel="preconnect" href="https://script.google.com">
+<link rel="preconnect" href="https://script.googleusercontent.com">
+<link rel="dns-prefetch" href="//script.google.com">
+<link rel="dns-prefetch" href="//script.googleusercontent.com">
+
+<style>
+:root {
+  --bg: #07080a;
+  --surface: #111318;
+  --surface2: #17191f;
+  --surface3: #1d2027;
+  --surface4: #22252d;
+  --text: #f7f8fa;
+  --muted: #a5a8b1;
+  --muted2: #747984;
+  --line: rgba(255,255,255,.085);
+  --lineStrong: rgba(255,255,255,.145);
+  --red: #e41c24;
+  --redHover: #f0272f;
+  --redSoft: rgba(228,28,36,.15);
+  --redFaint: rgba(228,28,36,.075);
+  --green: #36c96f;
+  --amber: #f4b74e;
+  --shadow: 0 22px 70px rgba(0,0,0,.42);
+  --ease: cubic-bezier(.2,.7,.25,1);
+}
+
+* { box-sizing: border-box; min-width: 0; }
+html { background: var(--bg); color-scheme: dark; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100svh;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", Inter, "Segoe UI", Helvetica, Arial, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 50% -10%, rgba(228,28,36,.20), transparent 34rem),
+    radial-gradient(circle at 105% 40%, rgba(255,255,255,.045), transparent 25rem),
+    linear-gradient(180deg, #08090b 0%, #0b0d10 48%, #07080a 100%);
+  padding:
+    max(20px, env(safe-area-inset-top))
+    max(16px, env(safe-area-inset-right))
+    max(30px, env(safe-area-inset-bottom))
+    max(16px, env(safe-area-inset-left));
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior-y: none;
+  overflow-x: hidden;
+}
+body.modal-open { overflow: hidden; }
+a, button, input, select, textarea { -webkit-tap-highlight-color: transparent; font: inherit; }
+a, button, .interactive { touch-action: manipulation; }
+button { color: inherit; }
+.page { width: min(100%, 520px); margin: 0 auto; }
+
+.topline {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  margin: 0 4px 18px;
+}
+.brand-lockup { display:flex; align-items:center; min-width:0; }
+.site-logo { display:block; width:min(100%,310px); height:auto; max-width:100%; }
+.connect-pill {
+  flex: 0 0 auto; display: inline-flex; align-items: center; gap: 7px; padding: 8px 10px;
+  border: 1px solid var(--line); border-radius: 999px; background: rgba(255,255,255,.035);
+  color: #c2c4ca; font-size: 11px;
+}
+.dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 13px rgba(54,201,111,.55); }
+
+.hero {
+  overflow: hidden; border: 1px solid var(--line); border-radius: 30px;
+  background: linear-gradient(145deg, rgba(255,255,255,.052), rgba(255,255,255,.015)), rgba(15,16,20,.95);
+  box-shadow: var(--shadow);
+}
+.photo-wrap { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: #101114; }
+.photo-wrap::after { content: ""; position: absolute; inset: auto 0 0; height: 48%; background: linear-gradient(to bottom, transparent, rgba(9,10,12,.94)); pointer-events: none; }
+.profile-photo { width: 100%; height: 100%; display: block; object-fit: cover; object-position: 50% 24%; transform: scale(1.015); }
+.hero-copy { position: relative; margin-top: -54px; padding: 0 22px 23px; z-index: 2; }
+.eyebrow { margin: 0 0 7px; color: #d5d6db; font-size: 11px; font-weight: 800; letter-spacing: .11em; text-transform: uppercase; }
+h1 { margin: 0; font-size: clamp(32px, 9vw, 44px); line-height: 1.02; letter-spacing: -.045em; font-weight: 840; }
+.role { margin: 10px 0 0; color: #b5b7be; font-size: 15px; line-height: 1.5; }
+.role strong { color: #f1f2f4; font-weight: 700; }
+.tagline { margin: 14px 0 0; color: #a2a5ad; font-size: 13px; line-height: 1.62; }
+.section-title { margin: 24px 4px 10px; color: #777a83; font-size: 10px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
+
+.interactive {
+  position: relative; overflow: hidden; isolation: isolate; transform: translateZ(0);
+  transition: transform .16s var(--ease), border-color .16s ease, box-shadow .18s ease, background .18s ease;
+}
+.interactive::after { content: ""; position: absolute; inset: 0; z-index: -1; opacity: 0; background: linear-gradient(135deg, rgba(228,28,36,.19), rgba(255,255,255,.04)); transition: opacity .16s ease; }
+.interactive:hover { border-color: var(--lineStrong); }
+.interactive.is-pressed { transform: scale(.975); border-color: rgba(228,28,36,.58); box-shadow: 0 0 0 1px rgba(228,28,36,.08), 0 12px 34px rgba(228,28,36,.12); }
+.interactive.is-pressed::after { opacity: 1; }
+.ripple { position: absolute; width: 18px; height: 18px; border-radius: 999px; pointer-events: none; z-index: 10; background: rgba(228,28,36,.34); transform: translate(-50%,-50%) scale(0); animation: ripple .48s ease-out forwards; }
+@keyframes ripple { to { transform: translate(-50%,-50%) scale(14); opacity: 0; } }
+
+.social-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
+.social {
+  min-height: 94px; border-radius: 22px; border: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.018)), var(--surface);
+  color: var(--text); text-decoration: none; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 9px; padding: 14px; box-shadow: 0 10px 30px rgba(0,0,0,.18);
+}
+.social-icon { width: 28px; height: 28px; display: grid; place-items: center; }
+.social-icon svg { width: 26px; height: 26px; display: block; }
+.social-label { font-size: 12px; font-weight: 730; color: #dedfe3; }
+.quick-contact { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 10px; }
+.mini-action {
+  min-height: 82px; border-radius: 20px; border: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(255,255,255,.034), rgba(255,255,255,.014)), var(--surface);
+  color: #eceef1; text-decoration: none; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 8px; font-size: 12px; font-weight: 710; padding: 10px 6px;
+}
+.mini-action svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+.actions { display: grid; gap: 11px; }
+.action {
+  min-height: 78px; width: 100%; border-radius: 22px; border: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(255,255,255,.040), rgba(255,255,255,.017)), var(--surface);
+  color: var(--text); text-decoration: none; display: grid; grid-template-columns: 48px minmax(0,1fr) 18px;
+  align-items: center; gap: 13px; padding: 13px 15px; box-shadow: 0 9px 26px rgba(0,0,0,.18); text-align: left; cursor: pointer;
+}
+.action-primary { border-color: rgba(228,28,36,.28); background: linear-gradient(135deg, rgba(228,28,36,.13), rgba(255,255,255,.022) 62%), var(--surface); box-shadow: 0 14px 38px rgba(0,0,0,.23), 0 0 0 1px rgba(228,28,36,.035) inset; }
+.action-primary .action-icon { color: #fff; border-color: rgba(228,28,36,.32); background: linear-gradient(180deg, rgba(228,28,36,.28), rgba(228,28,36,.16)); box-shadow: 0 10px 28px rgba(228,28,36,.11); }
+.action-icon {
+  width: 48px; height: 48px; border-radius: 15px; display: grid; place-items: center;
+  background: linear-gradient(180deg, rgba(255,255,255,.065), rgba(255,255,255,.026)), #17191f;
+  border: 1px solid rgba(255,255,255,.07); transition: color .16s ease, border-color .16s ease, background .16s ease, box-shadow .16s ease;
+}
+.interactive.is-pressed .action-icon { color: #fff; border-color: rgba(228,28,36,.38); background: rgba(228,28,36,.18); box-shadow: 0 0 24px rgba(228,28,36,.11); }
+.action-icon svg { width: 21px; height: 21px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.action-copy { overflow: hidden; }
+.action-title { display: block; font-size: 15px; line-height: 1.25; font-weight: 760; letter-spacing: -.012em; overflow-wrap: anywhere; }
+.action-subtitle { display: block; margin-top: 4px; color: var(--muted); font-size: 12px; line-height: 1.38; overflow-wrap: anywhere; }
+.chevron { width: 18px; display: grid; place-items: center; color: #6f727b; font-size: 22px; line-height: 1; transition: color .16s ease, transform .16s ease; }
+.interactive.is-pressed .chevron { color: #f3f4f6; transform: translateX(2px); }
+
+.visit-card { overflow: hidden; border: 1px solid var(--line); border-radius: 26px; background: linear-gradient(150deg, rgba(255,255,255,.045), rgba(255,255,255,.014)), var(--surface); box-shadow: 0 14px 40px rgba(0,0,0,.22); }
+.map-shell { position: relative; height: 188px; overflow: hidden; background: #17191f; }
+.map-shell iframe { width: 100%; height: 100%; border: 0; filter: saturate(.78) contrast(1.03) brightness(.88); }
+.map-overlay { position: absolute; inset: 0; pointer-events: none; box-shadow: inset 0 -40px 45px rgba(10,11,14,.35); }
+.visit-copy { padding: 18px; }
+.visit-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; }
+.visit-title { margin: 0; font-size: 17px; font-weight: 780; letter-spacing: -.02em; }
+.visit-address { margin: 5px 0 0; color: var(--muted); font-size: 12.5px; line-height: 1.5; }
+.store-status { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 6px; padding: 7px 9px; border: 1px solid var(--line); border-radius: 999px; background: rgba(255,255,255,.03); color: #c8cad0; font-size: 10px; font-weight: 730; }
+.store-status .status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--muted2); }
+.store-status.open .status-dot { background: var(--green); box-shadow: 0 0 10px rgba(54,201,111,.45); }
+.store-status.closed .status-dot { background: var(--red); box-shadow: 0 0 10px rgba(228,28,36,.34); }
+.hours-line { margin-top: 14px; padding-top: 13px; border-top: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; gap: 10px; color: #c5c7cc; font-size: 11.5px; }
+.hours-line span:last-child { color: var(--muted); text-align: right; }
+.map-actions { margin-top: 14px; display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+.map-btn { min-height: 46px; border-radius: 15px; border: 1px solid var(--line); background: rgba(255,255,255,.035); color: #f0f1f3; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-size: 12px; font-weight: 730; padding: 10px; }
+.map-btn.primary { border-color: rgba(228,28,36,.22); background: rgba(228,28,36,.11); }
+.map-btn svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.hours-details { margin: 12px 0 0; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+.hours-details summary { list-style: none; cursor: pointer; padding: 12px 13px; display: flex; justify-content: space-between; align-items: center; gap: 10px; color: #d5d6da; font-size: 11.5px; font-weight: 700; background: rgba(255,255,255,.025); }
+.hours-details summary::-webkit-details-marker { display: none; }
+.hours-details summary::after { content: "+"; color: var(--muted); font-size: 17px; font-weight: 400; line-height: 1; }
+.hours-details[open] summary::after { content: "−"; }
+.hours-grid { padding: 4px 13px 10px; background: rgba(0,0,0,.12); }
+.hours-row { display: flex; justify-content: space-between; gap: 16px; padding: 7px 0; color: var(--muted); font-size: 11px; }
+.hours-row.today { color: #f0f1f3; font-weight: 730; }
+
+.footer { padding: 27px 8px 8px; text-align: center; color: var(--muted2); font-size: 11px; line-height: 1.55; }
+.footer strong { display: block; color: #c8cad0; font-size: 12px; margin-bottom: 4px; }
+
+/* Scheduler */
+.scheduler-bridge { position: fixed; width: 1px; height: 1px; border: 0; opacity: 0; pointer-events: none; left: -9999px; bottom: 0; }
+.modal { position: fixed; inset: 0; z-index: 1000; display: none; align-items: flex-end; justify-content: center; background: rgba(1,2,3,.70); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); padding: max(10px,env(safe-area-inset-top)) max(10px,env(safe-area-inset-right)) max(10px,env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left)); }
+.modal.open { display: flex; animation: modalFade .2s ease-out; }
+@keyframes modalFade { from { opacity: 0; } to { opacity: 1; } }
+.sheet { width: min(100%, 560px); max-height: min(92svh, 820px); max-height: min(92dvh, 820px); border: 1px solid var(--lineStrong); border-radius: 30px; overflow: hidden; background: linear-gradient(180deg,#14161b 0%,#0d0f13 100%); box-shadow: 0 32px 100px rgba(0,0,0,.66); display: flex; flex-direction: column; animation: sheetUp .28s var(--ease); }
+@keyframes sheetUp { from { transform: translateY(24px) scale(.985); opacity: .7; } to { transform: translateY(0) scale(1); opacity: 1; } }
+.sheet-head { flex: 0 0 auto; padding: 14px 16px 12px; border-bottom: 1px solid var(--line); background: rgba(17,19,24,.94); backdrop-filter: blur(18px); }
+.sheet-handle { width: 42px; height: 4px; border-radius: 999px; background: rgba(255,255,255,.16); margin: 0 auto 13px; }
+.sheet-top { display: grid; grid-template-columns: 38px 1fr 38px; align-items: center; gap: 8px; }
+.sheet-icon-btn { width: 38px; height: 38px; border-radius: 12px; border: 1px solid var(--line); background: rgba(255,255,255,.035); color: #d9dbe0; display: grid; place-items: center; cursor: pointer; }
+.sheet-icon-btn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.sheet-title { text-align: center; }
+.sheet-title strong { display: block; font-size: 15px; letter-spacing: -.015em; }
+.sheet-title span { display: block; margin-top: 2px; color: var(--muted); font-size: 10.5px; }
+.progress { margin-top: 12px; display: grid; grid-template-columns: repeat(3,1fr); gap: 6px; }
+.progress span { height: 3px; border-radius: 999px; background: rgba(255,255,255,.08); transition: background .2s ease; }
+.progress span.active { background: var(--red); box-shadow: 0 0 12px rgba(228,28,36,.24); }
+#appointmentForm { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; overflow: hidden; }
+.sheet-body { flex: 1 1 auto; min-height: 0; width: 100%; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; padding: 20px 17px 28px; scroll-padding: 18px 0 110px; scrollbar-width: none; }
+.sheet-body::-webkit-scrollbar { display: none; }
+.step { display: none; width: min(100%, 470px); margin: 0 auto; }
+.step.active { display: block; animation: stepIn .19s ease-out; }
+@keyframes stepIn { from { opacity: .4; transform: translateX(5px); } to { opacity: 1; transform: none; } }
+.step-kicker { color: #a8aab1; font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.step h2 { margin: 7px 0 6px; font-size: 24px; line-height: 1.13; letter-spacing: -.035em; }
+.step-intro { margin: 0 0 19px; color: var(--muted); font-size: 12px; line-height: 1.55; }
+.field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.field { margin-bottom: 13px; }
+.field label { display: flex; justify-content: space-between; gap: 10px; margin: 0 2px 7px; color: #c7c9ce; font-size: 11px; font-weight: 680; }
+.field label span { color: var(--muted2); font-weight: 560; }
+.control { width: 100%; min-height: 50px; padding: 0 13px; border: 1px solid var(--line); border-radius: 15px; outline: none; background: rgba(255,255,255,.038); color: #f4f5f7; font-size: 16px; transition: border-color .15s ease, background .15s ease, box-shadow .15s ease; }
+.control:focus { border-color: rgba(228,28,36,.45); background: rgba(255,255,255,.052); box-shadow: 0 0 0 3px rgba(228,28,36,.08); }
+input.control, select.control, textarea.control { max-width: 100%; }
+.date-control-wrap { width: 100%; max-width: 100%; min-width: 0; overflow: hidden; border-radius: 15px; }
+.date-control-wrap .control { display: block; width: 100%; max-width: 100%; min-width: 0; margin: 0; }
+input[type="date"].control { box-sizing: border-box; inline-size: 100%; min-inline-size: 0; min-width: 0; overflow: hidden; }
+input[type="date"].control::-webkit-date-and-time-value { min-width: 0; width: 100%; text-align: left; }
+input[type="date"].control::-webkit-datetime-edit { min-width: 0; padding: 0; }
+input[type="date"].control::-webkit-calendar-picker-indicator { flex: 0 0 auto; margin: 0; padding: 4px; }
+select.control { appearance: none; -webkit-appearance: none; padding-right: 34px; background-image: linear-gradient(45deg,transparent 50%,#8b8e96 50%),linear-gradient(135deg,#8b8e96 50%,transparent 50%); background-position: calc(100% - 18px) 21px,calc(100% - 13px) 21px; background-size: 5px 5px,5px 5px; background-repeat: no-repeat; }
+textarea.control { min-height: 98px; padding-top: 13px; padding-bottom: 13px; resize: vertical; line-height: 1.45; }
+.control::placeholder { color: #686c75; }
+.segmented { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-bottom: 15px; }
+.segmented button { min-height: 48px; border: 1px solid var(--line); border-radius: 14px; background: rgba(255,255,255,.028); color: #b5b8bf; font-size: 11.5px; font-weight: 720; cursor: pointer; }
+.segmented button.selected { color: #fff; border-color: rgba(228,28,36,.35); background: rgba(228,28,36,.12); box-shadow: inset 0 0 0 1px rgba(228,28,36,.03); }
+.schedule-hours { display: flex; align-items: flex-start; gap: 10px; margin: -2px 0 14px; padding: 11px 12px; border: 1px solid var(--line); border-radius: 14px; background: rgba(255,255,255,.025); color: var(--muted); font-size: 10.5px; line-height: 1.45; }
+.schedule-hours svg { flex: 0 0 auto; width: 17px; height: 17px; fill: none; stroke: #c4c6cc; stroke-width: 1.8; }
+.time-label { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: 2px 2px 8px; color: #c7c9ce; font-size: 11px; font-weight: 680; }
+.time-meta { color: var(--muted2); font-size: 10px; font-weight: 560; }
+.time-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; }
+.time-btn { min-height: 42px; border: 1px solid var(--line); border-radius: 12px; background: rgba(255,255,255,.028); color: #d3d5da; font-size: 11px; font-weight: 710; cursor: pointer; }
+.time-btn:hover:not(:disabled) { border-color: var(--lineStrong); }
+.time-btn.selected { color: #fff; border-color: rgba(228,28,36,.42); background: rgba(228,28,36,.14); }
+.time-btn:disabled { opacity: .26; cursor: not-allowed; text-decoration: line-through; }
+.empty-times { grid-column: 1 / -1; padding: 18px 12px; border: 1px dashed var(--line); border-radius: 14px; color: var(--muted); font-size: 11px; line-height: 1.5; text-align: center; }
+.review-card { border: 1px solid var(--line); border-radius: 18px; overflow: hidden; background: rgba(255,255,255,.022); margin-bottom: 14px; }
+.review-row { display: grid; grid-template-columns: 86px 1fr; gap: 10px; padding: 11px 13px; border-bottom: 1px solid var(--line); font-size: 11.5px; line-height: 1.4; }
+.review-row:last-child { border-bottom: 0; }
+.review-row span:first-child { color: var(--muted2); }
+.review-row span:last-child { color: #e7e8eb; font-weight: 650; text-align: right; overflow-wrap: anywhere; }
+
+.final-summary-label { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: 1px 2px 8px; color: #c7c9ce; font-size: 11px; font-weight: 760; }
+.final-summary-label span:last-child { color: var(--muted2); font-size: 10px; font-weight: 560; }
+.optional-details { margin: 1px 0 14px; border: 1px solid var(--line); border-radius: 15px; overflow: hidden; background: rgba(255,255,255,.022); }
+.optional-details summary { min-height: 48px; list-style: none; cursor: pointer; padding: 13px 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; color: #d6d8dd; font-size: 11.5px; font-weight: 700; }
+.optional-details summary::-webkit-details-marker { display: none; }
+.optional-details summary::after { content: "+"; color: var(--muted); font-size: 19px; font-weight: 400; line-height: 1; }
+.optional-details[open] summary::after { content: "−"; }
+.optional-details .field { margin: 0; padding: 0 12px 12px; }
+.final-helper { margin: -2px 2px 14px; color: var(--muted2); font-size: 10.5px; line-height: 1.45; }
+.consent { margin: 13px 2px 0; color: var(--muted2); font-size: 9.5px; line-height: 1.5; }
+.honeypot { position: absolute !important; left: -9999px !important; opacity: 0 !important; pointer-events: none !important; }
+.form-error { display: none; margin: 12px 0 0; padding: 11px 12px; border: 1px solid rgba(228,28,36,.25); border-radius: 14px; background: rgba(228,28,36,.08); color: #f0b5b8; font-size: 10.5px; line-height: 1.45; }
+.form-error.show { display: block; }
+
+.sheet-foot { flex: 0 0 auto; padding: 12px 16px max(14px,env(safe-area-inset-bottom)); border-top: 1px solid var(--line); background: rgba(11,13,16,.96); backdrop-filter: blur(18px); display: grid; grid-template-columns: 105px 1fr; gap: 10px; }
+.foot-btn { min-height: 50px; border-radius: 15px; border: 1px solid var(--line); font-size: 12px; font-weight: 760; cursor: pointer; }
+.foot-btn.secondary { background: rgba(255,255,255,.035); color: #d5d7dc; }
+.foot-btn.primary { border-color: rgba(228,28,36,.48); background: linear-gradient(180deg,var(--redHover),var(--red)); color: #fff; box-shadow: 0 12px 30px rgba(228,28,36,.19); }
+.foot-btn:disabled { opacity: .4; cursor: not-allowed; box-shadow: none; }
+
+.success { display: none; width: min(100%, 470px); margin: 0 auto; text-align: center; padding: 12px 0 18px; }
+.success.active { display: block; animation: stepIn .2s ease-out; }
+.success-mark { width: 68px; height: 68px; margin: 4px auto 16px; border-radius: 22px; display: grid; place-items: center; border: 1px solid rgba(54,201,111,.30); background: rgba(54,201,111,.10); color: #7ee4a3; box-shadow: 0 16px 40px rgba(54,201,111,.08); }
+.success-mark svg { width: 31px; height: 31px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.success h2 { margin: 0; font-size: 25px; letter-spacing: -.035em; }
+.success p { margin: 8px auto 18px; max-width: 360px; color: var(--muted); font-size: 12px; line-height: 1.55; }
+.success-details { border: 1px solid var(--line); border-radius: 18px; background: rgba(255,255,255,.025); padding: 14px; text-align: left; }
+.success-details strong { display: block; font-size: 14px; }
+.success-details span { display: block; margin-top: 5px; color: var(--muted); font-size: 11.5px; line-height: 1.45; }
+.success-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin-top: 12px; }
+.success-action { min-height: 46px; border: 1px solid var(--line); border-radius: 14px; background: rgba(255,255,255,.035); color: #eff0f2; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 7px; font-size: 11.5px; font-weight: 720; cursor: pointer; }
+.success-action svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.success-done { width: 100%; min-height: 48px; margin-top: 10px; border: 1px solid var(--line); border-radius: 14px; background: rgba(255,255,255,.035); color: #eff0f2; font-size: 12px; font-weight: 740; cursor: pointer; }
+.fallback-box { margin-top: 13px; padding: 12px; border: 1px solid rgba(244,183,78,.22); border-radius: 15px; background: rgba(244,183,78,.07); color: #d9c69f; font-size: 10.5px; line-height: 1.5; }
+.fallback-box a { color: #fff0c7; font-weight: 720; }
+
+@media (hover:hover) and (pointer:fine) { .interactive:hover { transform: translateY(-1px); box-shadow: 0 12px 32px rgba(0,0,0,.24); } }
+@media (min-width: 620px) { .modal { align-items: center; } .sheet { border-radius: 30px; } }
+@media (max-width: 520px) {
+  .field-grid { grid-template-columns: 1fr; gap: 0; }
+  .time-grid { grid-template-columns: repeat(3,minmax(0,1fr)); }
+  /* GitHub Pages has no floating host badge, so use the full safe mobile viewport. */
+  .modal {
+    padding-top: max(8px,env(safe-area-inset-top));
+    padding-right: max(8px,env(safe-area-inset-right));
+    padding-bottom: max(8px,env(safe-area-inset-bottom));
+    padding-left: max(8px,env(safe-area-inset-left));
+  }
+  .sheet { max-height: calc(100dvh - 16px - env(safe-area-inset-top) - env(safe-area-inset-bottom)); border-radius: 24px; }
+  .sheet-body { padding: 18px 15px 28px; }
+  .step h2 { font-size: 22px; }
+  .step-intro { font-size: 12.5px; }
+  .field label { font-size: 12px; }
+  .date-control-wrap { width: 100%; max-width: 100%; }
+  input[type="date"].control { width: 100%; max-width: 100%; min-width: 0; }
+  .segmented button { min-height: 50px; font-size: 12px; }
+  .time-btn { min-height: 46px; font-size: 12px; }
+  .sheet-foot { grid-template-columns: minmax(88px, .72fr) 1.28fr; padding-left: 12px; padding-right: 12px; }
+  .foot-btn { min-height: 52px; font-size: 13px; }
+  .success-actions { grid-template-columns: 1fr; }
+  .visit-head { flex-direction: column; gap: 10px; }
+  .store-status { align-self: flex-start; }
+}
+@media (max-width: 350px) {
+  .time-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .map-actions { grid-template-columns: 1fr; }
+  .social-grid { gap: 9px; }
+}
+@media (max-width:380px) {
+  body { padding-left: 12px; padding-right: 12px; }
+  .hero-copy { padding-left: 18px; padding-right: 18px; }
+  .site-logo { width:min(100%,245px); }
+  .action { grid-template-columns: 44px minmax(0,1fr) 16px; gap: 10px; padding: 12px; }
+  .action-icon { width: 44px; height: 44px; }
+  .action-title { font-size: 14px; }
+  .action-subtitle { font-size: 11px; }
+  .segmented { gap: 6px; }
+  .segmented button { font-size: 10.5px; }
+  .sheet-body { padding-left: 14px; padding-right: 14px; }
+}
+@media (prefers-reduced-motion: reduce) { *,*::before,*::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
+</style>
+</head>
+<body>
+<main class="page">
+  <div class="topline">
+    <div class="brand-lockup"><img class="site-logo" src="jg-logo-horizontal.png" alt="Jeremy Gonzalez | Honda of Staten Island"></div>
+    <div class="connect-pill"><span class="dot"></span><span>Connect</span></div>
+  </div>
+
+  <section class="hero">
+    <div class="photo-wrap">
+      <picture>
+        <source srcset="jeremy-gonzalez.webp" type="image/webp">
+        <img class="profile-photo" src="jeremy-gonzalez.jpg" alt="Jeremy Gonzalez, Sales Consultant at Honda of Staten Island" width="960" height="1200">
+      </picture>
+    </div>
+    <div class="hero-copy">
+      <p class="eyebrow">Sales Consultant</p>
+      <h1>Jeremy Gonzalez</h1>
+      <p class="role"><strong>Honda of Staten Island</strong> · Staten Island, NY</p>
+      <p class="tagline">Here to make your Honda buying experience clear, comfortable, and straightforward from the first question to delivery.</p>
+    </div>
+  </section>
+
+  <div class="section-title">Contact</div>
+  <div class="quick-contact">
+    <a class="mini-action interactive" href="tel:+19173231047" aria-label="Call Jeremy">
+      <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.62 2.63a2 2 0 0 1-.45 2.11L8 9.73a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.85.29 1.73.5 2.63.62A2 2 0 0 1 22 16.92z"/></svg><span>Call</span>
+    </a>
+    <a class="mini-action interactive" href="sms:+19173231047" aria-label="Text Jeremy">
+      <svg viewBox="0 0 24 24"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg><span>Text</span>
+    </a>
+    <a class="mini-action interactive" href="mailto:jgonzalez@sihonda.com" aria-label="Email Jeremy">
+      <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span>Email</span>
+    </a>
+  </div>
+
+  <div class="section-title">Social</div>
+  <div class="social-grid">
+    <a class="social interactive" href="https://www.facebook.com/share/1d1JzCF4Sq/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer"><span class="social-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h3V4.5c-.6-.1-1.9-.2-3.4-.2-3.3 0-5.6 2-5.6 5.8V13H5v4h3v7h4.2v-7h3.5l.6-4h-4.1v-2.5c0-1.2.3-2.5 1.8-2.5Z" fill="currentColor"/></svg></span><span class="social-label">Facebook</span></a>
+    <a class="social interactive" href="https://www.tiktok.com/@zaynnaz" target="_blank" rel="noopener noreferrer"><span class="social-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.2 3c.5 2.5 1.9 4 4.3 4.7v3.7c-1.7 0-3.2-.5-4.4-1.4v6.3a5.9 5.9 0 1 1-5-5.8v3.8a2.2 2.2 0 1 0 1.2 2v-13h3.9Z" fill="currentColor"/></svg></span><span class="social-label">TikTok</span></a>
+  </div>
+
+  <div class="section-title">Start Here</div>
+  <div class="actions">
+    <a class="action interactive" href="Jeremy_Gonzalez.vcf">
+      <span class="action-icon"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
+      <span class="action-copy"><span class="action-title">Save My Contact</span><span class="action-subtitle">Add Jeremy directly to your phone</span></span><span class="chevron">›</span>
+    </a>
+
+    <button class="action interactive" id="openScheduler" type="button">
+      <span class="action-icon"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/><path d="m8.5 15 2 2 4.5-5"/></svg></span>
+      <span class="action-copy"><span class="action-title">Schedule a Test Drive With Me</span><span class="action-subtitle">Choose a vehicle, date, and time that works for you</span></span>
+      <span class="chevron">›</span>
+    </button>
+
+    <a class="action interactive" href="https://www.sihonda.com/searchnew.aspx" target="_blank" rel="noopener noreferrer">
+      <span class="action-icon"><svg viewBox="0 0 24 24"><path d="M3 13l2-5a3 3 0 0 1 2.8-2h8.4A3 3 0 0 1 19 8l2 5"/><path d="M5 13h14a2 2 0 0 1 2 2v3H3v-3a2 2 0 0 1 2-2z"/><circle cx="7" cy="16" r="1"/><circle cx="17" cy="16" r="1"/></svg></span>
+      <span class="action-copy"><span class="action-title">Browse New Honda Inventory</span><span class="action-subtitle">Explore current new Hondas in stock</span></span><span class="chevron">›</span>
+    </a>
+
+    <a class="action interactive" href="https://www.sihonda.com/searchused.aspx" target="_blank" rel="noopener noreferrer">
+      <span class="action-icon"><svg viewBox="0 0 24 24"><path d="M4 10.5 6 7h12l2 3.5"/><path d="M3 12.5h18v5.5H3z"/><path d="M6 18v2M18 18v2"/><circle cx="7" cy="15" r="1"/><circle cx="17" cy="15" r="1"/><path d="M9 7V5h6v2"/></svg></span>
+      <span class="action-copy"><span class="action-title">Browse Pre-Owned Inventory</span><span class="action-subtitle">Shop available used and pre-owned vehicles</span></span><span class="chevron">›</span>
+    </a>
+
+    <a class="action interactive" href="https://search.google.com/local/writereview?placeid=ChIJWdrMceROwokR9L0XhTPh66A" target="_blank" rel="noopener noreferrer">
+      <span class="action-icon"><svg viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3 6.4 20.2 7.5 14 3 9.6l6.2-.9L12 3z"/></svg></span>
+      <span class="action-copy"><span class="action-title">Leave a Google Review</span><span class="action-subtitle">Share your experience with Honda of Staten Island</span></span><span class="chevron">›</span>
+    </a>
+  </div>
+
+  <div class="section-title">Visit Me</div>
+  <section class="visit-card" aria-label="Honda of Staten Island location">
+    <div class="map-shell">
+      <iframe title="Map to Honda of Staten Island" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=250%20Parkinson%20Avenue%2C%20Staten%20Island%2C%20NY%2010305&z=15&output=embed"></iframe>
+      <div class="map-overlay"></div>
+    </div>
+    <div class="visit-copy">
+      <div class="visit-head">
+        <div><h2 class="visit-title">Visit Jeremy at Honda</h2><p class="visit-address">250 Parkinson Avenue<br>Staten Island, NY 10305</p></div>
+        <div class="store-status" id="storeStatus"><span class="status-dot"></span><span>Checking hours</span></div>
+      </div>
+      <div class="hours-line"><span id="todayLabel">Today</span><span id="todayHours">—</span></div>
+      <div class="map-actions">
+        <a class="map-btn primary interactive" id="primaryMaps" href="#" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg><span>Directions</span></a>
+        <a class="map-btn interactive" id="secondaryMaps" href="#" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M9 18 3 21V6l6-3 6 3 6-3v15l-6 3-6-3Z"/><path d="M9 3v15M15 6v15"/></svg><span>Google Maps</span></a>
+      </div>
+      <details class="hours-details"><summary>Sales hours</summary><div class="hours-grid" id="hoursGrid"></div></details>
+    </div>
+  </section>
+
+  <footer class="footer"><img src="jg-site-icon.png" alt="JG icon" style="width:42px;height:42px;border-radius:12px;display:block;margin:0 auto 10px;">
+    <strong>Jeremy Gonzalez · Honda of Staten Island</strong>(917) 323-1047 · jgonzalez@sihonda.com</footer>
+</main>
+
+<div class="modal" id="schedulerModal" role="dialog" aria-modal="true" aria-labelledby="schedulerTitle">
+  <div class="sheet">
+    <div class="sheet-head">
+      <div class="sheet-handle"></div>
+      <div class="sheet-top">
+        <button class="sheet-icon-btn" id="modalBack" type="button" aria-label="Go back"><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button>
+        <div class="sheet-title"><strong id="schedulerTitle">Schedule with Jeremy</strong><span>Honda of Staten Island</span></div>
+        <button class="sheet-icon-btn" id="closeScheduler" type="button" aria-label="Close scheduler"><svg viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+      </div>
+      <div class="progress" id="progress"><span class="active"></span><span></span><span></span></div>
+    </div>
+
+    <form id="appointmentForm" novalidate>
+      <div class="sheet-body" id="sheetBody">
+        <section class="step active" data-step="1">
+          <div class="step-kicker">Step 1 of 3</div><h2>What are you interested in?</h2><p class="step-intro">Pick what you know. If you're still deciding, that's completely fine.</p>
+          <input class="honeypot" type="text" name="website" id="website" autocomplete="off" tabindex="-1">
+          <div class="segmented" id="conditionSegment">
+            <button type="button" data-value="New" class="selected">New</button><button type="button" data-value="Pre-Owned">Pre-Owned</button><button type="button" data-value="Undecided">Undecided</button>
+          </div>
+          <input type="hidden" id="condition" name="condition" value="New">
+          <div class="field-grid">
+            <div class="field"><label for="year">Year <span>optional</span></label><select class="control" id="year" name="year"></select></div>
+            <div class="field" id="makeField"><label for="make">Make <span>pre-owned</span></label><input class="control" id="make" name="make" placeholder="Honda" value="Honda" autocomplete="organization"></div>
+          </div>
+          <div class="field-grid">
+            <div class="field"><label for="model">Model <span>or undecided</span></label><select class="control" id="model" name="model"></select></div>
+            <div class="field"><label for="trim">Trim <span>or undecided</span></label><select class="control" id="trim" name="trim"></select></div>
+          </div>
+          <div class="field" id="otherVehicleField" hidden><label for="otherVehicle">Other vehicle <span>optional</span></label><input class="control" id="otherVehicle" name="otherVehicle" placeholder="Example: Toyota RAV4 XLE"></div>
+        </section>
+
+        <section class="step" data-step="2">
+          <div class="step-kicker">Step 2 of 3</div><h2>Choose a date & time</h2><p class="step-intro">Choose the time that works best for you. Plan for about one hour at the dealership.</p>
+          <div class="schedule-hours"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>Mon–Thu 9 AM–7 PM · Fri–Sat 9 AM–6 PM · Sun 11 AM–4 PM. Start times are offered every 30 minutes. If Jeremy needs to adjust your time, he’ll contact you directly.</span></div>
+          <div class="field"><label for="appointmentDate">Date <span>up to 60 days ahead</span></label><div class="date-control-wrap"><input class="control" type="date" id="appointmentDate" name="appointmentDate" required></div></div>
+          <div class="time-label"><span>Appointment times</span><span class="time-meta" id="timeMeta">Select a date</span></div>
+          <div class="time-grid" id="timeGrid"><div class="empty-times">Select a date to choose an appointment time.</div></div>
+          <input type="hidden" id="appointmentTime" name="appointmentTime" required>
+        </section>
+
+        <section class="step" data-step="3">
+          <div class="step-kicker">Step 3 of 3</div><h2>Almost done</h2><p class="step-intro">Review your visit, then add the best contact information so Jeremy has everything ready for your appointment.</p>
+          <div class="final-summary-label"><span>Your appointment</span><span>Review before confirming</span></div>
+          <div class="review-card" id="reviewCard"></div>
+          <div class="field-grid">
+            <div class="field"><label for="firstName">First name</label><input class="control" id="firstName" name="firstName" autocomplete="given-name" required placeholder="First name"></div>
+            <div class="field"><label for="lastName">Last name</label><input class="control" id="lastName" name="lastName" autocomplete="family-name" required placeholder="Last name"></div>
+          </div>
+          <div class="field"><label for="phone">Mobile number</label><input class="control" id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="(555) 555-5555"></div>
+          <div class="field"><label for="email">Email <span style="color:#777c86;font-weight:600">(optional)</span></label><input class="control" id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com"></div>
+          <p class="final-helper">Optional. If provided, Jeremy can use it to follow up about your visit. No automatic customer email is sent.</p>
+          <details class="optional-details">
+            <summary>Add a note for Jeremy <span>optional</span></summary>
+            <div class="field"><textarea class="control" id="notes" name="notes" maxlength="800" aria-label="Notes for Jeremy" placeholder="Trade-in, preferred color, stock number, another trim you want to compare, or anything else I should know."></textarea></div>
+          </details>
+          <p class="consent">By scheduling, you agree that Jeremy may contact you by phone, text, or email regarding this appointment. Please don't enter financial, Social Security, or other sensitive information here.</p>
+          <div class="form-error" id="formError"></div>
+        </section>
+
+        <section class="success" id="successPanel">
+          <div class="success-mark"><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></div>
+          <h2>You're scheduled with Jeremy.</h2>
+          <p id="successMessage">Your appointment is set. Jeremy has the details and will be ready for your visit.</p>
+          <div class="success-details"><strong id="successWhen">—</strong><span id="successVehicle">—</span><span>Honda of Staten Island · 250 Parkinson Avenue, Staten Island, NY 10305</span></div>
+          <div class="success-actions">
+            <button class="success-action" id="addCalendar" type="button"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>Add to Calendar</button>
+            <a class="success-action" id="successDirections" href="https://www.google.com/maps/dir/?api=1&destination=250%20Parkinson%20Avenue%2C%20Staten%20Island%2C%20NY%2010305" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>Directions</a>
+          </div>
+          <button class="success-done interactive" id="successDone" type="button">Done</button>
+        </section>
+      </div>
+
+      <div class="sheet-foot" id="sheetFoot">
+        <button class="foot-btn secondary" id="footBack" type="button">Back</button>
+        <button class="foot-btn primary" id="footNext" type="button">Continue</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<iframe id="googleSchedulerBridge" name="googleSchedulerBridge" class="scheduler-bridge" title="Appointment service" aria-hidden="true" tabindex="-1"></iframe>
+<script src="scheduler-config.js"></script>
+<script>
+(() => {
+  const DEALER = {
+    address: '250 Parkinson Avenue, Staten Island, NY 10305',
+    timezone: 'America/New_York',
+    appointmentDurationMinutes: 60,
+    intervalMinutes: 30,
+    minimumLeadMinutes: 60,
+    hours: {
+      0: { open: '11:00', close: '16:00', label: '11:00 AM – 4:00 PM' },
+      1: { open: '09:00', close: '19:00', label: '9:00 AM – 7:00 PM' },
+      2: { open: '09:00', close: '19:00', label: '9:00 AM – 7:00 PM' },
+      3: { open: '09:00', close: '19:00', label: '9:00 AM – 7:00 PM' },
+      4: { open: '09:00', close: '19:00', label: '9:00 AM – 7:00 PM' },
+      5: { open: '09:00', close: '18:00', label: '9:00 AM – 6:00 PM' },
+      6: { open: '09:00', close: '18:00', label: '9:00 AM – 6:00 PM' }
+    }
+  };
+
+  const HONDA_TRIMS = {
+    'Accord': ['Undecided','LX','SE','Sport Hybrid','EX-L Hybrid','Sport-L Hybrid','Touring Hybrid'],
+    'Civic Sedan': ['Undecided','LX','Sport','Sport Hybrid','Sport Touring Hybrid'],
+    'Civic Hatchback': ['Undecided','Sport','Sport Hybrid','Sport Touring Hybrid','Type R'],
+    'HR-V': ['Undecided','LX','Sport','EX-L'],
+    'CR-V': ['Undecided','LX','EX','Sport Hybrid','EX-L','Sport-L Hybrid','TrailSport Hybrid','Sport Touring Hybrid'],
+    'Pilot': ['Undecided','Sport','EX-L','TrailSport','Touring','Elite','Black Edition'],
+    'Passport': ['Undecided','RTL','RTL Towing','TrailSport','TrailSport Elite','Blackout'],
+    'Odyssey': ['Undecided','EX-L','Sport-L','Touring','Elite'],
+    'Ridgeline': ['Undecided','Sport','RTL','TrailSport','Black Edition'],
+    'Prologue': ['Undecided','EX','Touring','Elite'],
+    'Other / Not listed': ['Undecided']
+  };
+
+  const $ = (id) => document.getElementById(id);
+  const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+
+  // tactile interactions
+  function bindInteractive(root = document) {
+    root.querySelectorAll('.interactive').forEach((el) => {
+      if (el.dataset.pressBound) return;
+      el.dataset.pressBound = '1';
+      const clearPressed = () => window.setTimeout(() => el.classList.remove('is-pressed'), 90);
+      el.addEventListener('pointerdown', (event) => {
+        el.classList.add('is-pressed');
+        const rect = el.getBoundingClientRect();
+        const ripple = document.createElement('span');
+        ripple.className = 'ripple'; ripple.style.left = `${event.clientX - rect.left}px`; ripple.style.top = `${event.clientY - rect.top}px`;
+        el.appendChild(ripple); ripple.addEventListener('animationend', () => ripple.remove(), { once:true });
+      });
+      el.addEventListener('pointerup', clearPressed); el.addEventListener('pointercancel', clearPressed); el.addEventListener('pointerleave', () => el.classList.remove('is-pressed'));
+      el.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') el.classList.add('is-pressed'); });
+      el.addEventListener('keyup', clearPressed);
+    });
+  }
+  bindInteractive();
+
+  // New York clock / store status
+  function nyParts(date = new Date()) {
+    const parts = new Intl.DateTimeFormat('en-US',{ timeZone: DEALER.timezone, weekday:'long', year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit', hour12:false }).formatToParts(date);
+    const obj = {}; parts.forEach(p => { if (p.type !== 'literal') obj[p.type] = p.value; });
+    return obj;
+  }
+  function mins(hhmm) { const [h,m] = hhmm.split(':').map(Number); return h*60+m; }
+  function updateStoreHours() {
+    const now = nyParts();
+    const dayIndex = days.indexOf(now.weekday);
+    const schedule = DEALER.hours[dayIndex];
+    const current = Number(now.hour === '24' ? 0 : now.hour)*60 + Number(now.minute);
+    const open = current >= mins(schedule.open) && current < mins(schedule.close);
+    const status = $('storeStatus'); status.classList.toggle('open',open); status.classList.toggle('closed',!open);
+    status.querySelector('span:last-child').textContent = open ? `Open · until ${schedule.label.split(' – ')[1]}` : 'Closed now';
+    $('todayLabel').textContent = `${now.weekday} sales hours`;
+    $('todayHours').textContent = schedule.label;
+    const grid = $('hoursGrid'); grid.innerHTML = '';
+    [1,2,3,4,5,6,0].forEach(i => {
+      const row = document.createElement('div'); row.className = `hours-row${i === dayIndex ? ' today' : ''}`;
+      row.innerHTML = `<span>${days[i]}${i === dayIndex ? ' · Today' : ''}</span><span>${DEALER.hours[i].label}</span>`; grid.appendChild(row);
+    });
+  }
+  updateStoreHours(); setInterval(updateStoreHours, 60000);
+
+  // Device-aware directions
+  const encodedDestination = encodeURIComponent(DEALER.address);
+  const ua = navigator.userAgent || '';
+  const isApple = /iPhone|iPad|iPod|Macintosh/.test(ua);
+  const appleUrl = `https://maps.apple.com/?daddr=${encodedDestination}`;
+  const googleUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodedDestination}`;
+  if (isApple) {
+    $('primaryMaps').href = appleUrl; $('primaryMaps').querySelector('span').textContent = 'Apple Maps';
+    $('secondaryMaps').href = googleUrl; $('secondaryMaps').querySelector('span').textContent = 'Google Maps';
+    $('successDirections').href = appleUrl;
+  } else {
+    $('primaryMaps').href = googleUrl; $('primaryMaps').querySelector('span').textContent = 'Google Maps';
+    $('secondaryMaps').href = `geo:0,0?q=${encodedDestination}`; $('secondaryMaps').querySelector('span').textContent = 'Maps App';
+    $('successDirections').href = googleUrl;
+  }
+
+  // Scheduler state
+  const modal = $('schedulerModal');
+  const form = $('appointmentForm');
+  let step = 1;
+  let lastFocused = null;
+  let openedAt = 0;
+  let lastAppointment = null;
+  const bridgeFrame = $('googleSchedulerBridge');
+  const pendingBridge = new Map();
+  const APPS_SCRIPT_URL = String((window.JEREMY_SCHEDULER && window.JEREMY_SCHEDULER.endpoint) || '').trim();
+  const backendConfigured = /^https:\/\/script\.google\.com\//i.test(APPS_SCRIPT_URL) && !APPS_SCRIPT_URL.includes('PASTE_');
+  let lastBackendWarmup = 0;
+
+  function warmSchedulerBackend(force=false) {
+    if (!backendConfigured) return;
+    const now = Date.now();
+    if (!force && now - lastBackendWarmup < 120000) return;
+    lastBackendWarmup = now;
+    try {
+      fetch(APPS_SCRIPT_URL, { method:'GET', mode:'no-cors', credentials:'omit', cache:'no-store', keepalive:true }).catch(()=>{});
+    } catch (_) {}
+  }
+
+  // Warm the Apps Script runtime during idle time instead of making the customer
+  // pay the full cold-start cost after pressing Confirm Test Drive.
+  if ('requestIdleCallback' in window) requestIdleCallback(() => warmSchedulerBackend(), {timeout:1800});
+  else setTimeout(() => warmSchedulerBackend(), 900);
+
+  function openModal() {
+    warmSchedulerBackend();
+    lastFocused = document.activeElement; openedAt = Date.now();
+    modal.classList.add('open'); document.body.classList.add('modal-open'); modal.setAttribute('aria-hidden','false');
+    step = 1; showStep(); setTimeout(() => $('conditionSegment').querySelector('button').focus({preventScroll:true}), 80);
+  }
+  function closeModal() {
+    modal.classList.remove('open'); document.body.classList.remove('modal-open'); modal.setAttribute('aria-hidden','true');
+    if (lastFocused) lastFocused.focus({preventScroll:true});
+  }
+  $('openScheduler').addEventListener('click', openModal);
+  $('closeScheduler').addEventListener('click', closeModal);
+  $('successDone').addEventListener('click', closeModal);
+  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
+
+  function showStep() {
+    document.querySelectorAll('.step').forEach(s => s.classList.toggle('active', Number(s.dataset.step) === step));
+    document.querySelectorAll('#progress span').forEach((p,i) => p.classList.toggle('active', i < step));
+    $('modalBack').style.visibility = step > 1 ? 'visible' : 'hidden';
+    $('footBack').style.visibility = step > 1 ? 'visible' : 'hidden';
+    $('footNext').textContent = step === 3 ? 'Confirm Test Drive' : 'Continue';
+    $('sheetBody').scrollTo({top:0,behavior:'smooth'});
+    if (step === 3) updateReview();
+  }
+  function goBack() { if (step > 1) { step--; showStep(); } }
+  $('modalBack').addEventListener('click', goBack); $('footBack').addEventListener('click', goBack);
+
+  // Vehicle controls
+  const yearSelect = $('year');
+  function populateYears() {
+    yearSelect.innerHTML = '<option value="Undecided">Undecided</option>';
+    const currentYear = Number(nyParts().year);
+    const condition = $('condition').value;
+    if (condition === 'New') {
+      [currentYear+1,currentYear].forEach(y => yearSelect.insertAdjacentHTML('beforeend',`<option value="${y}">${y}</option>`));
+      yearSelect.value = String(currentYear);
+    } else if (condition === 'Pre-Owned') {
+      for (let y=currentYear+1; y>=currentYear-12; y--) yearSelect.insertAdjacentHTML('beforeend',`<option value="${y}">${y}</option>`);
+      yearSelect.value = 'Undecided';
+    }
+  }
+  function populateModels() {
+    $('model').innerHTML = '<option value="Undecided">Undecided</option>' + Object.keys(HONDA_TRIMS).map(m => `<option value="${m}">${m}</option>`).join('');
+    $('trim').innerHTML = '<option value="Undecided">Undecided</option>';
+  }
+  function populateTrims() {
+    const model = $('model').value;
+    const trims = HONDA_TRIMS[model] || ['Undecided'];
+    $('trim').innerHTML = trims.map(t => `<option value="${t}">${t}</option>`).join('');
+    $('otherVehicleField').hidden = model !== 'Other / Not listed';
+  }
+  $('conditionSegment').addEventListener('click', e => {
+    const btn = e.target.closest('button[data-value]'); if (!btn) return;
+    $('conditionSegment').querySelectorAll('button').forEach(b => b.classList.toggle('selected', b === btn));
+    $('condition').value = btn.dataset.value;
+    const preOwned = btn.dataset.value === 'Pre-Owned';
+    $('makeField').hidden = !preOwned;
+    $('make').value = preOwned ? 'Honda' : 'Honda';
+    populateYears();
+  });
+  $('model').addEventListener('change', populateTrims);
+  populateYears(); populateModels(); $('makeField').hidden = true;
+
+  // Date + appointment time selection
+  function localIsoDate(date) {
+    const p = new Intl.DateTimeFormat('en-CA',{ timeZone: DEALER.timezone, year:'numeric', month:'2-digit', day:'2-digit' }).formatToParts(date);
+    const o={}; p.forEach(x => { if(x.type!=='literal') o[x.type]=x.value; }); return `${o.year}-${o.month}-${o.day}`;
+  }
+  function addDaysIso(iso, daysToAdd) { const d = new Date(`${iso}T12:00:00Z`); d.setUTCDate(d.getUTCDate()+daysToAdd); return d.toISOString().slice(0,10); }
+  function setupDateBounds() { const today = localIsoDate(new Date()); $('appointmentDate').min = today; $('appointmentDate').max = addDaysIso(today,60); }
+  setupDateBounds();
+
+  function dayIndexFromIso(iso) { return new Date(`${iso}T12:00:00`).getDay(); }
+  function formatTime(totalMins) { let h=Math.floor(totalMins/60), m=totalMins%60; const ap=h>=12?'PM':'AM'; const h12=h%12||12; return `${h12}:${String(m).padStart(2,'0')} ${ap}`; }
+  function isTodayNY(iso) { return iso === localIsoDate(new Date()); }
+  function currentNYMinutes() { const p=nyParts(); return Number(p.hour==='24'?0:p.hour)*60+Number(p.minute); }
+  function bridgeRequest(fields, timeoutMs=0) {
+    if (!backendConfigured) return Promise.reject(new Error('Online scheduling is being connected. Please contact Jeremy directly for now.'));
+    const requestId = `jg-${Date.now()}-${Math.random().toString(36).slice(2,9)}`;
+    return new Promise((resolve,reject) => {
+      // Booking intentionally has no elapsed-time timeout. Optional timeouts are
+      // used only by nonessential background requests such as internal email.
+      let timer=null;
+      if(timeoutMs>0){
+        timer=setTimeout(()=>{
+          pendingBridge.delete(requestId);
+          reject(new Error('Background request timed out.'));
+        },timeoutMs);
+      }
+      pendingBridge.set(requestId,{resolve,reject,timer});
+      const formEl=document.createElement('form');
+      formEl.method='POST'; formEl.action=APPS_SCRIPT_URL; formEl.target='googleSchedulerBridge'; formEl.style.display='none';
+      const payload={...fields,requestId,returnOrigin:window.location.origin};
+      Object.entries(payload).forEach(([name,value])=>{
+        const input=document.createElement('input'); input.type='hidden'; input.name=name; input.value=value == null ? '' : String(value); formEl.appendChild(input);
+      });
+      document.body.appendChild(formEl);
+      formEl.submit();
+      formEl.remove();
+    });
+  }
+
+  function queueInternalNotification(fields) {
+    if (!backendConfigured) return;
+    const notifyFields={...fields,action:'notify'};
+    let settled=false;
+    // Send Jeremy's internal appointment alert immediately after Calendar success.
+    // This request is non-blocking so email delivery never delays the success screen.
+    bridgeRequest(notifyFields,7000).then(()=>{ settled=true; }).catch(()=>{});
+    // If Google is slow or the page is about to close, send a keepalive fallback.
+    // The backend deduplicates both requests by clientBookingId, so a retry cannot
+    // intentionally send Jeremy duplicate appointment emails.
+    setTimeout(()=>{
+      if(settled) return;
+      const payload = new URLSearchParams({
+        ...notifyFields,
+        requestId: `notify-fallback-${Date.now()}-${Math.random().toString(36).slice(2,9)}`,
+        returnOrigin: window.location.origin
+      });
+      try {
+        fetch(APPS_SCRIPT_URL,{
+          method:'POST',mode:'no-cors',credentials:'omit',keepalive:true,
+          headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'},
+          body:payload.toString()
+        }).catch(()=>{});
+      } catch (_) {}
+    },650);
+  }
+  function isGoogleSchedulerOrigin(origin) {
+    try {
+      const u = new URL(origin);
+      return u.protocol === 'https:' && (u.hostname === 'script.google.com' || u.hostname.endsWith('.googleusercontent.com'));
+    } catch (_) { return false; }
+  }
+  window.addEventListener('message', e => {
+    // Apps Script HtmlService runs inside Google's own nested sandbox iframe.
+    // The responding window is therefore not the same Window object as our outer bridge iframe.
+    if (!isGoogleSchedulerOrigin(e.origin)) return;
+    const data=e.data;
+    if (!data || data.source !== 'jeremy-google-scheduler' || !data.requestId) return;
+    const pending=pendingBridge.get(data.requestId); if(!pending)return;
+    if (pending.timer) clearTimeout(pending.timer); pendingBridge.delete(data.requestId);
+    if(data.ok===false) pending.reject(new Error(data.error || 'The appointment service could not complete that request.'));
+    else pending.resolve(data);
+  });
+
+  function renderAppointmentTimes() {
+    const date = $('appointmentDate').value;
+    $('appointmentTime').value='';
+    if (!date) {
+      $('timeGrid').innerHTML='<div class="empty-times">Select a date to choose an appointment time.</div>';
+      $('timeMeta').textContent='Select a date';
+      return;
+    }
+    const schedule=DEALER.hours[dayIndexFromIso(date)];
+    const grid=$('timeGrid'); grid.innerHTML='';
+    const start=mins(schedule.open), close=mins(schedule.close), lastStart=close-DEALER.appointmentDurationMinutes;
+    const leadCutoff = isTodayNY(date) ? currentNYMinutes() + DEALER.minimumLeadMinutes : -1;
+    let count=0;
+    for(let t=start;t<=lastStart;t+=DEALER.intervalMinutes){
+      if(t < leadCutoff) continue;
+      const time=`${String(Math.floor(t/60)).padStart(2,'0')}:${String(t%60).padStart(2,'0')}`;
+      const button=document.createElement('button'); button.type='button'; button.className='time-btn'; button.dataset.time=time; button.textContent=formatTime(t);
+      button.addEventListener('click',()=>{ grid.querySelectorAll('.time-btn').forEach(b=>b.classList.remove('selected')); button.classList.add('selected'); $('appointmentTime').value=button.dataset.time; $('timeMeta').textContent=`${formatTime(t)} selected · about 1 hour`; });
+      grid.appendChild(button); count++;
+    }
+    if(!count){grid.innerHTML='<div class="empty-times">No appointment start times remain for today. Please choose another date.</div>';}
+    $('timeMeta').textContent=count ? `${count} start time${count===1?'':'s'} · 30-minute intervals` : 'Choose another date';
+  }
+  $('appointmentDate').addEventListener('change',renderAppointmentTimes);
+
+  function vehicleSummary() {
+    const condition=$('condition').value, year=$('year').value, make=$('make').value.trim()||'Honda', model=$('model').value, trim=$('trim').value;
+    if ($('otherVehicle').value.trim()) return `${condition} · ${$('otherVehicle').value.trim()}`;
+    return [condition,year!=='Undecided'?year:null,condition==='Pre-Owned'&&make!=='Honda'?make:null,model!=='Undecided'?model:null,trim!=='Undecided'?trim:null].filter(Boolean).join(' · ') || 'Vehicle undecided';
+  }
+  function dateTimeLabel() {
+    const d=$('appointmentDate').value,t=$('appointmentTime').value; if(!d||!t)return 'Not selected';
+    const displayDate=new Date(`${d}T12:00:00`); const [h,m]=t.split(':').map(Number);
+    return `${new Intl.DateTimeFormat('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'}).format(displayDate)} · ${formatTime(h*60+m)}`;
+  }
+  function updateReview() {
+    $('reviewCard').innerHTML=`<div class="review-row"><span>Vehicle</span><span>${escapeHtml(vehicleSummary())}</span></div><div class="review-row"><span>Appointment</span><span>${escapeHtml(dateTimeLabel())}</span></div><div class="review-row"><span>Location</span><span>Honda of Staten Island</span></div>`;
+  }
+  function escapeHtml(s){return String(s).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));}
+  function validStep() {
+    $('formError').classList.remove('show');
+    if(step===1) return true;
+    if(step===2){ if(!$('appointmentDate').value){$('appointmentDate').focus();return false;} if(!$('appointmentTime').value){$('timeMeta').textContent='Please choose a time';return false;} return true; }
+    if(step===3){
+      for(const id of ['firstName','lastName','phone']){const el=$(id);if(!el.value.trim()){el.focus();return false;}}
+      if($('email').value.trim() && !$('email').checkValidity()){$('email').focus();return false;}
+      return true;
+    }
+  }
+  $('footNext').addEventListener('click',async()=>{
+    if(!validStep())return;
+    if(step<3){step++;showStep();return;}
+    await submitAppointment();
+  });
+
+  function cleanPhone(v){ return v.replace(/[^\d+]/g,''); }
+  async function submitAppointment(){
+    warmSchedulerBackend();
+    const submit=$('footNext'); const original=submit.textContent; submit.disabled=true; submit.textContent='Setting appointment…'; $('formError').classList.remove('show');
+    const payload={
+      action:'book', condition:$('condition').value, year:$('year').value, make:$('make').value.trim()||'Honda', model:$('model').value, trim:$('trim').value, otherVehicle:$('otherVehicle').value.trim(),
+      appointmentDate:$('appointmentDate').value, appointmentTime:$('appointmentTime').value,
+      firstName:$('firstName').value.trim(), lastName:$('lastName').value.trim(), phone:cleanPhone($('phone').value), email:$('email').value.trim(), notes:$('notes').value.trim(),
+      website:$('website').value, formElapsedMs:Date.now()-openedAt,
+      clientBookingId:`booking-${Date.now()}-${Math.random().toString(36).slice(2,10)}`
+    };
+    let slowNoticeTimer;
+    try{
+      slowNoticeTimer=setTimeout(()=>{
+        if(submit.disabled) submit.textContent='Confirming with Google…';
+      },3500);
+      const data=await bridgeRequest(payload);
+      if(slowNoticeTimer) clearTimeout(slowNoticeTimer);
+      lastAppointment={...payload,...data};
+      // The Calendar event is already created. Jeremy's alert is fired immediately
+      // in the background, so the customer never waits for email delivery.
+      queueInternalNotification({...payload,eventId:data.eventId||''});
+      showSuccess(data);
+    }catch(err){
+      if(slowNoticeTimer) clearTimeout(slowNoticeTimer);
+      const msg=err && err.message ? err.message : 'I could not set this appointment right now.';
+      $('formError').innerHTML=`${escapeHtml(msg)}<div class="fallback-box">You can still reach Jeremy directly: <a href="sms:+19173231047?&body=${encodeURIComponent(`Hi Jeremy, I'd like to schedule a test drive for ${vehicleSummary()} on ${dateTimeLabel()}.`)}">text Jeremy</a> or call <a href="tel:+19173231047">(917) 323-1047</a>.</div>`;
+      $('formError').classList.add('show');
+    }finally{submit.disabled=false;submit.textContent=original;}
+  }
+  function showSuccess(data){
+    document.querySelectorAll('.step').forEach(s=>s.classList.remove('active')); $('successPanel').classList.add('active'); $('sheetFoot').style.display='none'; $('progress').style.visibility='hidden'; $('modalBack').style.visibility='hidden';
+    $('successWhen').textContent=dateTimeLabel(); $('successVehicle').textContent=vehicleSummary();
+    $('successMessage').textContent='Your appointment is set. Jeremy has the details and will be ready for your visit.';
+    $('sheetBody').scrollTo({top:0,behavior:'smooth'});
+  }
+
+  function resetScheduler(){
+    form.reset(); $('successPanel').classList.remove('active'); $('sheetFoot').style.display='grid'; $('progress').style.visibility='visible'; $('condition').value='New';
+    $('conditionSegment').querySelectorAll('button').forEach(b=>b.classList.toggle('selected',b.dataset.value==='New')); $('makeField').hidden=true; populateYears(); populateModels(); $('timeGrid').innerHTML='<div class="empty-times">Select a date to choose an appointment time.</div>'; $('timeMeta').textContent='Select a date'; setupDateBounds(); step=1;showStep();
+  }
+  $('closeScheduler').addEventListener('click',()=>{ if($('successPanel').classList.contains('active')) setTimeout(resetScheduler,250); });
+
+  function icsDate(date,time){ const [y,m,d]=date.split('-'),[hh,mm]=time.split(':'); return `${y}${m}${d}T${hh}${mm}00`; }
+  function escapeIcs(s){return String(s).replace(/\\/g,'\\\\').replace(/;/g,'\\;').replace(/,/g,'\\,').replace(/\n/g,'\\n');}
+  $('addCalendar').addEventListener('click',()=>{
+    if(!lastAppointment)return;
+    const [h,m]=lastAppointment.appointmentTime.split(':').map(Number); let endMins=h*60+m+DEALER.appointmentDurationMinutes; const end=`${String(Math.floor(endMins/60)).padStart(2,'0')}:${String(endMins%60).padStart(2,'0')}`;
+    const ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Jeremy Gonzalez//Test Drive//EN','CALSCALE:GREGORIAN','BEGIN:VEVENT',`DTSTART;TZID=America/New_York:${icsDate(lastAppointment.appointmentDate,lastAppointment.appointmentTime)}`,`DTEND;TZID=America/New_York:${icsDate(lastAppointment.appointmentDate,end)}`,`SUMMARY:${escapeIcs('Test Drive with Jeremy Gonzalez')}`,`LOCATION:${escapeIcs(DEALER.address)}`,`DESCRIPTION:${escapeIcs(vehicleSummary())}`,'END:VEVENT','END:VCALENDAR'].join('\r\n');
+    const blob=new Blob([ics],{type:'text/calendar;charset=utf-8'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url;a.download='Jeremy-Gonzalez-Test-Drive.ics';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+  });
+
+  // Simple phone formatter for US numbers
+  $('phone').addEventListener('input',e=>{ const digits=e.target.value.replace(/\D/g,'').slice(0,10); if(digits.length<4)e.target.value=digits; else if(digits.length<7)e.target.value=`(${digits.slice(0,3)}) ${digits.slice(3)}`; else e.target.value=`(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6)}`; });
+})();
+</script>
+</body>
+</html>
