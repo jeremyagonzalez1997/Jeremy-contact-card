@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#08090b">
+<title>Jeremy Scheduler Test</title>
+<style>
+body{margin:0;background:#08090b;color:#f5f6f8;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding:24px}main{max-width:560px;margin:8vh auto}.card{border:1px solid #292d35;border-radius:22px;background:#111318;padding:24px;box-shadow:0 20px 60px rgba(0,0,0,.35)}.eyebrow{color:#e41c24;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}h1{font-size:26px;margin:8px 0}.muted{color:#9aa0aa;line-height:1.55}.result{margin-top:18px;padding:16px;border:1px solid #292d35;border-radius:15px;background:#171a20}.ok{border-color:rgba(54,201,111,.45)}.bad{border-color:rgba(228,28,36,.5)}button{margin-top:16px;width:100%;min-height:48px;border:0;border-radius:14px;background:#e41c24;color:#fff;font-weight:800;font-size:15px}code{word-break:break-all;color:#cfd2d8;font-size:11px}
+</style>
+<script src="scheduler-config.js"></script>
+</head>
+<body><main><div class="card"><div class="eyebrow">Private setup check</div><h1>Scheduler connection test</h1><p class="muted">This page only checks whether the public website can read the Google Apps Script status endpoint. It does not create an appointment.</p><button id="test">Test Google connection</button><div id="result" class="result">Ready to test.</div></div></main>
+<script>
+const result=document.getElementById('result');
+function test(){
+ const endpoint=String(window.JEREMY_SCHEDULER?.endpoint||'').trim();
+ if(!endpoint){result.className='result bad';result.textContent='scheduler-config.js is missing or empty.';return;}
+ result.className='result';result.innerHTML='Testing…<br><code>'+endpoint.replace(/</g,'&lt;')+'</code>';
+ const cb='__jgDiag_'+Date.now(); let finished=false; const script=document.createElement('script');
+ const cleanup=()=>{if(finished)return;finished=true;clearTimeout(timer);try{delete window[cb]}catch(_){window[cb]=undefined}script.remove()};
+ window[cb]=(data)=>{cleanup();result.className='result ok';result.innerHTML='<strong>Connected.</strong><br>Google returned state: '+String(data?.state||'unknown')+'<br>Backend version: '+String(data?.version||'not reported');};
+ const timer=setTimeout(()=>{cleanup();result.className='result bad';result.innerHTML='<strong>No response.</strong><br>The Apps Script deployment is not serving the status endpoint to this site yet.';},7000);
+ script.onerror=()=>{cleanup();result.className='result bad';result.innerHTML='<strong>Connection failed.</strong><br>Check the Apps Script deployment version and make sure access is set to Anyone.';};
+ const u=new URL(endpoint);u.searchParams.set('action','status');u.searchParams.set('clientBookingId','diagnostic-'+Date.now());u.searchParams.set('prefix',cb);u.searchParams.set('_',Date.now());script.src=u;document.head.appendChild(script);
+}
+document.getElementById('test').addEventListener('click',test);test();
+</script></body></html>
